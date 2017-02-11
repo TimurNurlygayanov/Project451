@@ -1,3 +1,6 @@
 flask
 flask_login
 flask_httpauth
+scipy
+numpy
+scikit-image
