@@ -1,4 +1,4 @@
-from flask.ext.httpauth import HTTPBasicAuth
+from flask_httpauth import HTTPBasicAuth
 
 from app import app
 
