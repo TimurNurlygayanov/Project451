@@ -1,17 +1,17 @@
 from skimage import io, filters, transform, util
 import numpy
 
+sample_size = (64, 32) # default input sample dimensions
+sample_pixels = sample_size[0] * sample_size[1]
 
 class Preprocessor():
     """ Class for preprocessing input data
     into NN-suitable format
     """
 
-    sample_size = (256, 128) # default input sample dimensions
-
     def get_sample_data_fs(self, file_name, file_result = None):
         """ Method sampling image loaded from filesystem
-        into a blob matrix
+        into a blob tuple
         """
 
         img = io.imread(file_name, as_grey=True)
@@ -37,12 +37,12 @@ class Preprocessor():
         if upper[0] != -1:
             img = img[lower[0] : upper[0], lower[1] : upper[1]]
 
-        factor = min(self.sample_size[i] / img.shape[i] for i in range(2))
+        factor = min(sample_size[i] / img.shape[i] for i in range(2))
         img = transform.rescale(img, factor).astype(bool)
 
         pads = []
         for dim in range(2):
-            delta = self.sample_size[dim] - img.shape[dim]
+            delta = sample_size[dim] - img.shape[dim]
             before = int(delta / 2)
             after = delta - before
             pads.append((before, after))
@@ -52,7 +52,4 @@ class Preprocessor():
         if file_result is not None:
             io.imsave(file_result, img.astype(int) * 255)
 
-        return img
-
-prep = Preprocessor()
-prep.get_sample_data_fs('0_test.jpg', 'result.jpg')
+        return numpy.reshape(img, (1, -1))[0].astype(int)
