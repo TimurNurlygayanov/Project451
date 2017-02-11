@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_login import LoginManager
 
-#import config as cfg
+import app.config as cfg
 
 
 app = Flask(__name__)
