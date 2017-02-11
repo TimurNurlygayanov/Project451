@@ -37,15 +37,15 @@ def verify_password(username_or_token, password):
     return None
 
 
-@app.route('/api/neuroweb/study')
+@app.route('/api/neural/learn')
 @auth.login_required
-def neuroweb_study():
+def neural_learn():
     # TODO: implement
     return None
 
 
-@app.route('/api/neuroweb/ask')
+@app.route('/api/neural/recognize')
 @auth.login_required
-def neuroweb_ask():
+def neural_recognize():
     # TODO: implement
     return None
