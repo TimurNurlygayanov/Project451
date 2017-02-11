@@ -1,4 +1,4 @@
-from helper import hash_password
+from app.helper import hash_password
 
 
 class User(object):
