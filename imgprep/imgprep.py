@@ -18,8 +18,7 @@ class Preprocessor():
         if img is None:
             return None
 
-        # TODO
-        # the following is working sufficiently only on black-on-white images
+        # TODO the following is working sufficiently only with black-on-white images
         thres = filters.threshold_otsu(img)
         img = img > thres
         img = numpy.invert(img) # white-on-black is handled quite better
