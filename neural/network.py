@@ -13,7 +13,8 @@ class Network():
         self.net = NetworkReader.readFromFile(file_name)
 
     def write_to_file(self, file_name):
-        NetworkWriter.writeToFile(net, file_name)
+        if self.net is not None:
+            NetworkWriter.writeToFile(self.net, file_name)
 
     def init(self, hlayers=2):
         self.net = buildNetwork(imgprep.sample_pixels, hlayers, 10, bias=False)
