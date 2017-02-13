@@ -4,4 +4,5 @@ flask_httpauth==3.2.2
 scipy==0.18.1
 numpy==1.12.0
 scikit-image==0.12.3
+tqdm==4.11.2
 https://github.com/pybrain/pybrain/archive/0.3.3.zip
