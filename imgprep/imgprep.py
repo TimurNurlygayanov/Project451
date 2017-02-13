@@ -1,5 +1,6 @@
-from skimage import io, filters, transform, util
 import numpy
+
+from skimage import io, filters, transform, util
 
 sample_size = (64, 32) # default input sample dimensions
 sample_pixels = sample_size[0] * sample_size[1]
@@ -8,16 +9,7 @@ class Preprocessor():
     """ Class for preprocessing input data
     into NN-suitable format
     """
-
-    def get_sample_data_fs(self, file_name, file_result = None):
-        """ Method sampling image loaded from filesystem
-        into a blob tuple
-        """
-
-        img = io.imread(file_name, as_grey=True)
-        if img is None:
-            return None
-
+    def get_sample_data_array(self, img, file_result=None):
         # TODO the following is working sufficiently only with black-on-white images
         thres = filters.threshold_otsu(img)
         img = img > thres
@@ -52,3 +44,14 @@ class Preprocessor():
             io.imsave(file_result, img.astype(int) * 255)
 
         return numpy.reshape(img, (1, -1))[0].astype(int)
+
+    def get_sample_data_fs(self, file_name, file_result = None):
+        """ Method sampling image loaded from filesystem
+        into a blob tuple
+        """
+
+        img = io.imread(file_name, as_grey=True)
+        if img is None:
+            return None
+
+        return self.get_sample_data_array(img, file_result)
