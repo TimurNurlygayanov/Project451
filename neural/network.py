@@ -1,9 +1,12 @@
+import imgprep
+
 from pybrain.tools.shortcuts import buildNetwork
 from pybrain.tools.customxml import NetworkWriter, NetworkReader
 from pybrain.supervised.trainers import BackpropTrainer
 from pybrain.datasets import SupervisedDataSet
-import imgprep
 from functools import reduce
+from pybrain.structure.modules import SoftmaxLayer
+from tqdm import tqdm
 
 
 class Network():
@@ -17,14 +20,17 @@ class Network():
             NetworkWriter.writeToFile(self.net, file_name)
 
     def init(self, hlayers=2):
-        self.net = buildNetwork(imgprep.sample_pixels, hlayers, 10, bias=False)
+        self.net = buildNetwork(imgprep.sample_pixels, hlayers, 10, outclass=SoftmaxLayer)
 
-    def train(self, dataset, epochs=None):
+    def train(self, dataset, epochs=None, progress=False):
         trainer = BackpropTrainer(self.net, dataset.ds)
         if epochs is None:
             trainer.trainUntilConvergence()
         else:
-            for e in range(epochs):
+            rng = range(epochs)
+            if progress:
+                rng = tqdm(rng, desc='training', unit='epoch')
+            for e in rng:
                 trainer.train()
 
     def activate(self, blob):
