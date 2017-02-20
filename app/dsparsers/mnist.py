@@ -3,7 +3,7 @@ import numpy
 
 from skimage import io
 from dsparsers.parser import Parser
-from imgprep import Preprocessor
+from app.imgprep import Preprocessor
 from tqdm import tqdm
 from neural import Dataset
 
