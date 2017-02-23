@@ -1,8 +1,9 @@
 from flask import request, jsonify, g
 from flask_httpauth import HTTPBasicAuth
 
-from app import app, db, cfg
-from models import User, USER_ROLES
+from app import app, cfg
+from models import User, USER_ROLES, find_user_role
+from managers import user_manager as um
 
 auth = HTTPBasicAuth()
 
@@ -21,37 +22,55 @@ def new_user():
     if c is not None:
         return c
 
-    user = User(username=username, password=password, role=USER_ROLES['user'])
-    db.session.add(user)
-    db.session.commit()
-
+    user = um.new_user(username, password)
+    print(user.role)
     return jsonify({
         'id': user.id,
         'username': user.username,
-        'role': user.role
+        'role': USER_ROLES[find_user_role(user.role)]
     }), 201
 
 
 @app.route('/api/v1/user/<int:user_id>', methods=['GET'])
 @auth.login_required
 def get_user(user_id):
-    user = User.query.filter_by(id=user_id).first()
+    user = um.get_user(user_id)
     return jsonify({
         'id': user.id,
         'username': user.username,
-        'role': user.role
+        'role': USER_ROLES[find_user_role(user.role)]
     }), 200
 
 
 @app.route('/api/v1/token')
 @auth.login_required
 def get_auth_token():
-    token = g.user.generate_auth_token()
+    token = um.get_auth_token(g.user)
     return jsonify({
         'id': g.user.id,
         'username': g.user.username,
+        'role': g.user.role,
         'token': token.decode('ascii')
-    })
+    }), 200
+
+
+@app.route('/api/v1/user/<int:user_id>', methods=['POST'])
+@auth.login_required
+def update_role(user_id):
+    c = check_role(g.user, [USER_ROLES['admin']])
+    if c is not None:
+        return c
+
+    user = User.query.filter_by(id=user_id).first()
+    if user is None:
+        return send_error('User with this ID is not found', 400)
+
+    user = um.update_user_role(user, request.json.get('role'))
+    return jsonify({
+        'id': user.id,
+        'username': user.username,
+        'role': USER_ROLES[find_user_role(user.role)]
+    }), 200
 
 
 @auth.verify_password
@@ -97,6 +116,11 @@ def check_user_fields(username, password):
         return send_error('User with the same name is already exists', 400)
 
     return None
+
+
+def check_role(user, available_roles):
+    if user.role not in available_roles:
+        return send_error('You have not enough permissions', 400)
 
 
 def send_error(message, status_code, args=None, description=None):

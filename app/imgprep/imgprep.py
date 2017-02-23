@@ -37,7 +37,7 @@ class Preprocessor(object):
 
         # carefully extract sample if there's at least one `True`
         if upper[0] != -1:
-            img = img[lower[0]: upper[0], lower[1]: upper[1]]
+            img = img[lower[0]:upper[0], lower[1]:upper[1]]
 
         # scale image such that it fits into `sample_size` bbox
         # precisely it will fit exactly to at least one dimension

@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="jumbotron">
+    <h3>Registration</h3>
+    <h5>Create your personal account</h5>
+
+    <form class="form-signin" action="/join" method="POST">
+        {{ form.hidden_tag() }}
+
+        {{ form.username(class_="form-control") }}
+        {{ form.password(class_="form-control") }}
+
+        <p class="lead"></p>
+        <button id="btn-signup" class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
+
+        <p class="lead"></p>
+        {% include "flashes.html" %}
+    </form>
+
+    <p><h4>Already have an account? <a href="/login">Sign in!</a></h4></p>
+</div>
+
+{% endblock %}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Project 451</title>
+
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/jumbotron-narrow.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container" style="width: 1024px;">
+    <div class="header">
+        <nav>
+            <ul class="nav nav-pills pull-right">
+                    {% if user %}
+                <li role="presentation" class="active">
+                    <a href="/#" class="not-link">{{ user.username }}</a>
+                <li role="presentation"><a href="/logout">Log Out</a>
+                    {% else %}
+                <li role="presentation" class="active"><a href="/login">Sign In</a>
+                <li role="presentation"><a href="/join">Sign Up</a>
+                    {% endif %}
+            </ul>
+        </nav>
+        <h3 class="text-muted"><a href="/" class="title-link">Project 451</a></h3>
+    </div>
+
+    {% block content %}{% endblock %}
+
+    <footer class="footer">
+        <p>SSU. CSIT. Software Engineering. 2017</p>
+    </footer>
+
+</div>
+</body>
+
+</html>

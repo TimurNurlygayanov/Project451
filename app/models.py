@@ -4,12 +4,17 @@ from itsdangerous import (TimedJSONWebSignatureSerializer
 from app import db, cfg
 from app.api.helper import hash_password
 
-
 USER_ROLES = {
     'user': 0,
     'manager': 1,
     'admin': 2
 }
+
+
+def find_user_role(i):
+    for k, v in USER_ROLES.items():
+        if v == i:
+            return k
 
 
 class User(db.Model):
