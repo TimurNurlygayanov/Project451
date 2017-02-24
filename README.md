@@ -4,13 +4,13 @@ To start application:
 #### Usage
 Install dependencies:
 
-You will need PostgreSQL package, so install corresponding package in your system, like for Ubuntu:
+* You will need some system packages, so install corresponding packages in your system, like for Ubuntu:
 
-	sudo apt-get install postgresql-server-dev-9.5
+		sudo apt-get install python3 python3-pip postgresql-server-dev-9.5
 
-Then install required python3 packages:
+* Then install required python3 packages:
 
-    pip3 install -r requirements.txt
+		pip3 install -r requirements.txt
 
 
 Set environment variables:
