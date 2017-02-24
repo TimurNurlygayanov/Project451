@@ -2,19 +2,23 @@ import os
 import numpy
 
 from skimage import io
-from dsparsers.parser import Parser
-from imgprep import Preprocessor
 from tqdm import tqdm
+
+from dsparsers.parser import Parser
+from imgprep.imgprep import Preprocessor
 from neural import Dataset
 
+
 class MNISTParser(Parser):
-    "Class for downloading and parsing the famous hand-written digits dataset"
+    """Class for downloading and parsing the famous hand-written digits dataset"""
 
     dsurls = [
-            # contains images itself
-            ('http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz', '.cache/mnist/images.gz', '6c95f4b05d2bf285e1bfb0e7960c31bd3b3f8a7d'),
-            # contains labels (what digits are on images)
-            ('http://yann.lecun.com/exdb/mnist/train-labels-idx1-ubyte.gz', '.cache/mnist/labels.gz', '2a80914081dc54586dbdf242f9805a6b8d2a15fc')
+        # contains images itself
+        ('http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz', '.cache/mnist/images.gz',
+         '6c95f4b05d2bf285e1bfb0e7960c31bd3b3f8a7d'),
+        # contains labels (what digits are on images)
+        ('http://yann.lecun.com/exdb/mnist/train-labels-idx1-ubyte.gz', '.cache/mnist/labels.gz',
+         '2a80914081dc54586dbdf242f9805a6b8d2a15fc')
     ]
 
     def read_int32(self, handle):
@@ -44,7 +48,7 @@ class MNISTParser(Parser):
                 (snum, rows, cols) = [self.read_int32(fimages) for i in range(3)]
 
                 # assert that the numbers of samples matches in both
-                assert(snum == self.read_int32(flabels))
+                assert (snum == self.read_int32(flabels))
 
                 if max_samples is not None:
                     snum = min(snum, max_samples)

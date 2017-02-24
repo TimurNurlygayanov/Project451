@@ -5,11 +5,12 @@ import math
 
 from tqdm import tqdm
 
-class Parser():
-    "Base class for file-based dataset parsers."
+
+class Parser(object):
+    """Base class for file-based dataset parsers."""
 
     # stores triples (<URL of file>, <local path to store>, <sha1sum digest>) 
-    dsurls = None     
+    dsurls = None
 
     def load_urls(self):
         """Preloads files defined in dsurls.
@@ -45,6 +46,7 @@ class Parser():
                 for data in tqdm(resp.iter_content(chunk_size=65536), total=chunks):
                     handle.write(data)
 
-    def progress(self, snum):
+    @staticmethod
+    def progress(snum):
         # inner wrapper for tqdm progress bar for sample parsing
         return tqdm(range(snum), desc='parsing', unit='sample')

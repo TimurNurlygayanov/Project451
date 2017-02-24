@@ -6,10 +6,12 @@ from skimage import io, filters, transform, util
 sample_size = (64, 32)
 sample_pixels = sample_size[0] * sample_size[1]
 
-class Preprocessor():
-    "Class for preprocessing input data into NN-suitable format."
 
-    def get_sample_data_array(self, img, file_result=None):
+class Preprocessor(object):
+    """Class for preprocessing input data into NN-suitable format."""
+
+    @staticmethod
+    def get_sample_data_array(img, file_result=None):
         """Processes grayscale array image into binary array NN-suitable sample.
 
         Mirrors result to file `file_result` if specified."""
@@ -35,7 +37,7 @@ class Preprocessor():
 
         # carefully extract sample if there's at least one `True`
         if upper[0] != -1:
-            img = img[lower[0] : upper[0], lower[1] : upper[1]]
+            img = img[lower[0]:upper[0], lower[1]:upper[1]]
 
         # scale image such that it fits into `sample_size` bbox
         # precisely it will fit exactly to at least one dimension
@@ -62,7 +64,7 @@ class Preprocessor():
         # NNs are dealing with linear arrays, so reshape our image
         return numpy.reshape(img, (1, -1))[0].astype(int)
 
-    def get_sample_data_fs(self, file_name, file_result = None):
+    def get_sample_data_fs(self, file_name, file_result=None):
         """Loads and processes image from filesystem into binary array NN-suitable sample.
 
         Mirrors result to file `file_result` if specified."""

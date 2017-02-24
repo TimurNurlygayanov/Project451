@@ -1,8 +1,8 @@
 import numpy
 
-from dsparsers.mnist import MNISTParser
-from neural import Dataset, Network
-from imgprep import Preprocessor
+from app.dsparsers.mnist import MNISTParser
+from app.neural import Dataset, Network
+from app.imgprep import Preprocessor
 
 parser = MNISTParser()
 parser.load_urls()

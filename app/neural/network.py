@@ -1,4 +1,4 @@
-import imgprep
+from app import imgprep
 
 from pybrain.tools.shortcuts import buildNetwork
 from pybrain.tools.customxml import NetworkWriter, NetworkReader
@@ -9,7 +9,7 @@ from pybrain.structure.modules import SoftmaxLayer
 from tqdm import tqdm
 
 
-class Network():
+class Network(object):
     net = None
 
     def read_from_file(self, file_name):

@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="jumbotron">
+    <h1>Project 451</h1>
+
+    <p class="lead"></p>
+
+    {% if not user %}
+    <p><a class="btn btn-lg btn-success" href="/join" role="button">Sign up for free today</a>
+        {% else %}
+
+    <p><a class="btn btn-lg btn-success" href="/mailbox" role="button">Go to system!</a>
+        {% endif %}
+
+    </p>
+</div>
+
+{% endblock %}
