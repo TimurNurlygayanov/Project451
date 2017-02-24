@@ -45,7 +45,7 @@ def login():
                          headers=headers,
                          auth=(form.username.data, form.password.data))
 
-        # Successfully authorization
+        # Successful authorization
         if r.status_code == 200:
             data = json.loads(r.text)
             print(data)
