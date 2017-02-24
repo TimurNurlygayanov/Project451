@@ -4,7 +4,13 @@ To start application:
 #### Usage
 Install dependencies:
 
-    pip3 install -r requirements.txt
+* You will need some system packages, so install corresponding packages in your system, like for Ubuntu:
+
+		sudo apt-get install python3 python3-pip postgresql-server-dev-all
+
+* Then install required python3 packages:
+
+		pip3 install -r requirements.txt
 
 
 Set environment variables:
