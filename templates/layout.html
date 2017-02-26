@@ -15,14 +15,16 @@
     <div class="header">
         <nav>
             <ul class="nav nav-pills pull-right">
-                    {% if user %}
-                <li role="presentation" class="active">
-                    <a href="/#" class="not-link">{{ user.username }}</a>
-                <li role="presentation"><a href="/logout">Log Out</a>
-                    {% else %}
-                <li role="presentation" class="active"><a href="/login">Sign In</a>
-                <li role="presentation"><a href="/join">Sign Up</a>
-                    {% endif %}
+                {% if user %}
+                        {# if user is admin or manager #}
+                        {% if user.role == 2 or user.role == 1 %}
+                            <li role="presentation"><a href="/sample/add">Add learning sample</a>
+                        {% endif %}
+                    <li role="presentation"><a href="/logout">Log Out ({{user.username}})</a>
+                        {% else %}
+                    <li role="presentation" class="active"><a href="/login">Sign In</a>
+                    <li role="presentation"><a href="/join">Sign Up</a>
+                {% endif %}
             </ul>
         </nav>
         <h3 class="text-muted"><a href="/" class="title-link">Project 451</a></h3>

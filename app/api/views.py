@@ -23,7 +23,7 @@ def new_user():
         return c
 
     user = um.new_user(username, password)
-    print(user.role)
+
     return jsonify({
         'id': user.id,
         'username': user.username,
@@ -88,18 +88,18 @@ def verify_password(username_or_token, password):
     return True
 
 
-@app.route('/api/v1/neural/learn')
+@app.route('/api/v1/neural/sample/add', methods=['POST'])
 @auth.login_required
-def neural_learn():
+def neural_add_sample():
     # TODO: implement
-    return None
+    return send_error('(-_-)', 200)
 
 
-@app.route('/api/v1/neural/recognize')
+@app.route('/api/v1/neural/recognize', methods=['POST'])
 @auth.login_required
 def neural_recognize():
     # TODO: implement
-    return None
+    return send_error('(-_-)', 200)
 
 
 def check_user_fields(username, password):
