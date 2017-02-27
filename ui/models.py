@@ -7,6 +7,7 @@ class User(object):
 
 
 class LoggedUser(object):
-    def __init__(self, username):
+    def __init__(self, username, role):
         self.username = username
+        self.role = role
         self.logged = True

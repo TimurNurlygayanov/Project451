@@ -11,7 +11,23 @@
     <p><a class="btn btn-lg btn-success" href="/join" role="button">Sign up for free today</a>
         {% else %}
 
-    <p><a class="btn btn-lg btn-success" href="/mailbox" role="button">Go to system!</a>
+        <div class="jumbotron">
+            <h3>Upload image to recognize</h3>
+            <form class="form-signin" action="/recognize" method="POST" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+
+                <div class="form-group">
+                    {{ form.image(class_="form-control") }}
+                </div>
+
+        <p class="lead"></p>
+        <button id="btn-signin" class="btn btn-lg btn-primary btn-block" type="submit">Upload</button>
+
+        <p class="lead"></p>
+        {% include "flashes.html" %}
+        </form>
+        </div>
+
         {% endif %}
 
     </p>

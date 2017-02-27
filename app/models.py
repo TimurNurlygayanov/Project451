@@ -2,7 +2,7 @@ from itsdangerous import (TimedJSONWebSignatureSerializer
                           as Serializer, BadSignature, SignatureExpired)
 
 from app import db, cfg
-from app.api.helper import hash_password
+from helper import hash_password
 
 USER_ROLES = {
     'user': 0,
