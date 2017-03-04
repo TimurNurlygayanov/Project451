@@ -13,19 +13,27 @@ Install dependencies:
 		pip3 install -r requirements.txt
 
 
-Set environment variables:
+Set environment variables for application:
 
     export HOST="<Host address>" # otherwise it will use localhost
     export PORT="<Port on which app will be deployed>" # otherwise it will use 5000
     export DATABASE_URI="<sql>://<username>:<password>@<host>:<port>/<database>" # required
 
+Set environment variables for ui client if needed:
+
+    export HOST_UI="<Host UI address>" # otherwise it will use localhost
+    export PORT_UI="<Port on which ui client will be deployed>" # otherwise it will use 5001
+    export API_URL="<Url for application api>" # set it if you use custome HOST and PORT variables for app
 
 Migrate database schema:
 
-    python3 migrate.py db init
-    python3 migrate.py db migrate
     python3 migrate.py db upgrade
+    python3 migrate.py db migrate
 
 Run:
 
     python3 run.py
+
+Run UI:
+
+    python3 run_ui.py
