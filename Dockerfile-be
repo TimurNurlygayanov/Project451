@@ -1,0 +1,13 @@
+FROM pjk451/base:1.0.0
+
+ENV PJK_HOME /opt/ssu/pjk451
+ENV PYTHONPATH ${PJK_HOME}/src/app
+
+COPY requirements.txt ${PJK_HOME}/src/
+RUN pip3 install -r ${PJK_HOME}/src/requirements.txt
+
+COPY ./ ${PJK_HOME}/src/
+
+WORKDIR ${PJK_HOME}/src
+CMD ["python3", "run.py"]
+
