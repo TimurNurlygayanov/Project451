@@ -17,6 +17,21 @@ def find_user_role(i):
             return k
 
 
+class ImageRepresentation(db.Model):
+    """Model for collect preprocessed images"""
+
+    __tablename__ = 'image_binaryes'
+    __table_args__ = {'extend_existing': True}
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    digit = db.Column(db.SmallInteger, nullable=False)
+    representation = db.Column(db.LargeBinary, nullable=False)
+
+    def __init__(self, digit, representation):
+        self.digit = digit
+        self.representation = representation
+
+
 class User(db.Model):
     __tablename__ = 'users'
     __table_args__ = {'extend_existing': True}

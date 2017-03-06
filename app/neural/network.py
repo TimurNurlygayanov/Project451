@@ -4,7 +4,6 @@ from pybrain.tools.shortcuts import buildNetwork
 from pybrain.tools.customxml import NetworkWriter, NetworkReader
 from pybrain.supervised.trainers import BackpropTrainer
 from pybrain.datasets import SupervisedDataSet
-from functools import reduce
 from pybrain.structure.modules import SoftmaxLayer
 from tqdm import tqdm
 

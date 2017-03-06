@@ -4,6 +4,7 @@ from flask_httpauth import HTTPBasicAuth
 from app import app, cfg
 from models import User, USER_ROLES, find_user_role
 from managers import user_manager as um
+from managers import img_manager
 
 auth = HTTPBasicAuth()
 
@@ -91,7 +92,7 @@ def verify_password(username_or_token, password):
 @app.route('/api/v1/neural/sample/add', methods=['POST'])
 @auth.login_required
 def neural_add_sample():
-    # TODO: implement
+    img_manager.read_archive(request.data)
     return send_error('(-_-)', 200)
 
 

@@ -12,6 +12,10 @@ Install dependencies:
 
 		pip3 install -r requirements.txt
 
+* For testing you need additional requirements. For install it just run:
+
+    pip3 install -r test-requirements.txt
+
 
 Set environment variables for application:
 
@@ -37,3 +41,7 @@ Run:
 Run UI:
 
     python3 run_ui.py
+
+Run unit test:
+
+    py.test

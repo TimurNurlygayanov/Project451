@@ -116,13 +116,11 @@ def recognize():
                 flash(error, 'danger')
             return _render_template('index.html', form=form)
 
-        file = form.image.data
-        files = {file.name: (file.filename, file)}
         # TODO requests.exceptions.ConnectionError throws
         r = requests.post(api_url + '/neural/recognize',
                           headers=headers,
                           auth=(session['user']['token'], 'unused'),
-                          files=files)
+                          data=form.image.data)
 
         # Successful upload
         if r.status_code == 200:
@@ -146,12 +144,10 @@ def add_sample():
                 flash(error, 'danger')
             return _render_template('sample_add.html', form=form)
 
-        file = form.archived_images.data
-        files = {file.name: (file.filename, file)}
         r = requests.post(api_url + '/neural/sample/add',
                           headers=headers,
                           auth=(session['user']['token'], 'unused'),
-                          files=files)
+                          data=form.archived_images.data)
 
         # Successful upload
         if r.status_code == 200:
