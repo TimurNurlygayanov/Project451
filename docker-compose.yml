@@ -1,0 +1,28 @@
+version: '2'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile-be
+    ports:
+      - "5000:5000"
+    environment:
+      DATABASE_URI: "postgresql://pjk451:pjk451@db:5432/pjk451"
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile-fe
+    ports:
+      - "5001:5001"
+    environment:
+      API_URL: "http://backend:5000"
+
+  db:
+    image: postgres:9.6.2-alpine
+    environment:
+      POSTGRES_PASSWORD: "pjk451"
+      POSTGRES_USER: "pjk451"
+      POSTGRES_DB: "pjk451"
+
