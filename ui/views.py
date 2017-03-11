@@ -101,7 +101,7 @@ def register():
 
         return _render_error(r)
 
-    return _render_template('join.html', form=form)
+    return _render_template('join.html', form=form, join=True)
 
 
 @app.route('/recognize', methods=['POST', 'GET'])

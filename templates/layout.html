@@ -22,8 +22,8 @@
                         {% endif %}
                     <li role="presentation"><a href="/logout">Log Out ({{user.username}})</a>
                         {% else %}
-                    <li role="presentation" class="active"><a href="/login">Sign In</a>
-                    <li role="presentation"><a href="/join">Sign Up</a>
+                    <li role="presentation" {%if join %}{% else %} class="active"{% endif %}><a href="/login">Sign In</a>
+                    <li role="presentation" {%if join %} class="active" {% endif %}><a href="/join">Sign Up</a>
                 {% endif %}
             </ul>
         </nav>
