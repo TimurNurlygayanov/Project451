@@ -10,10 +10,9 @@ sample_pixels = sample_size[0] * sample_size[1]
 class Preprocessor(object):
     """Class for preprocessing input data into NN-suitable format."""
 
-    @staticmethod
-    def get_sample_data_array(img, file_result=None):
+    @classmethod
+    def get_sample_data_array(cls, img, file_result=None):
         """Processes grayscale array image into binary array NN-suitable sample.
-
         Mirrors result to file `file_result` if specified."""
 
         # binarize the image firstly by threshold filter
@@ -64,9 +63,9 @@ class Preprocessor(object):
         # NNs are dealing with linear arrays, so reshape our image
         return numpy.reshape(img, (1, -1))[0].astype(int)
 
-    def get_sample_data_fs(self, file_name, file_result=None):
+    @classmethod
+    def get_sample_data_fs(cls, file_name, file_result=None):
         """Loads and processes image from filesystem into binary array NN-suitable sample.
-
         Mirrors result to file `file_result` if specified."""
 
         # read image in grayscale
@@ -76,4 +75,4 @@ class Preprocessor(object):
         if img is None:
             return None
 
-        return self.get_sample_data_array(img, file_result)
+        return cls.get_sample_data_array(img, file_result)
